@@ -15,7 +15,7 @@ var AuthorForm = React.createClass({
 
 	render: function() {
 		return (
-			<form>
+			<div>
 				<h1>Galeria</h1>
 				<Input
 					name="name"
@@ -44,10 +44,11 @@ var AuthorForm = React.createClass({
 					value={this.props.pic.location}
 					onChange={this.props.onChange}
 					error={this.props.errors.location} />
-
-                 <ImageUploader />
+                
+				<ImageUploader />
+     
 				<input type="submit" value="Save" className="btn btn-default" onClick={this.props.onSave} />
-			</form>
+			</div>
 		);
 	}
 });

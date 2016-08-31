@@ -45842,7 +45842,7 @@ var AuthorForm = React.createClass({displayName: "AuthorForm",
 
 	render: function() {
 		return (
-			React.createElement("form", null, 
+			React.createElement("div", null, 
 				React.createElement("h1", null, "Galeria"), 
 				React.createElement(Input, {
 					name: "name", 
@@ -45871,8 +45871,9 @@ var AuthorForm = React.createClass({displayName: "AuthorForm",
 					value: this.props.pic.location, 
 					onChange: this.props.onChange, 
 					error: this.props.errors.location}), 
-
-                 React.createElement(ImageUploader, null), 
+                
+				React.createElement(ImageUploader, null), 
+     
 				React.createElement("input", {type: "submit", value: "Save", className: "btn btn-default", onClick: this.props.onSave})
 			)
 		);
@@ -46465,18 +46466,22 @@ var React = require('react');
 var ImageUpload = React.createClass({displayName: "ImageUpload",
 
 getInitialState () {
+    console.log('Image initialstate-');
+
     return {
       file: '',imagePreviewUrl: ''
     };
   },
 
   _handleSubmit(e) {
+   /* console.log('Image handleSubmit-');
     e.preventDefault();
     // TODO: do something with -> this.state.file
-    console.log('handle uploading-', this.state.file);
+    console.log('handle uploading-', this.state.file);*/
   },
 
   _handleImageChange(e) {
+      console.log('Image handleImageChange-');
     e.preventDefault();
 
     let reader = new FileReader();
@@ -46493,19 +46498,20 @@ getInitialState () {
   },
 
   render() {
+      console.log('Image render: ', this.state);
     let {imagePreviewUrl} = this.state;
     let $imagePreview = null;
     if (imagePreviewUrl) {
       $imagePreview = (React.createElement("img", {src: imagePreviewUrl}));
     } else {
-      $imagePreview = (React.createElement("div", {className: "previewText"}, "Please select an Image for Preview"));
+      $imagePreview = (React.createElement("div", null, "Please select an Image for Preview"));
     }
-
+     console.log('Done with ImagePreview.. now doing return-');
     return (
-      React.createElement("div", {className: "previewComponent"}, 
+      React.createElement("div", null, 
         React.createElement("form", {onSubmit: (e)=>this._handleSubmit(e)}, 
-          React.createElement("input", {className: "fileInput", type: "file", onChange: (e)=>this._handleImageChange(e)}), 
-          React.createElement("button", {className: "submitButton", type: "submit", onClick: (e)=>this._handleSubmit(e)}, "Upload Image")
+          React.createElement("input", {type: "file", onChange: (e)=>this._handleImageChange(e)}), 
+          React.createElement("button", {type: "submit", onClick: (e)=>this._handleSubmit(e)}, "Upload Image")
         ), 
         React.createElement("div", {className: "imgPreview"}, 
           $imagePreview
